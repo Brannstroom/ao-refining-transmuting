@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Albion Online Resource Refining Calculator</title>
+        <meta name="description" content="An efficient and easy-to-use Resource Refining Calculator for Albion Online! Refine resources and maximize your profits with many useful features.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="keywords" content=" Albion online, refining calculator, refining resource, profit calculator, Albion Online tools, Albion Online calculator, Albion Online silver making, Albion Online profit, Albion Online refining, Albion Online resource refining">
+        <meta name="author" content="Peter Brännström">
+
+        <link rel="stylesheet" href="styles/index.css">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+        <meta name="google-site-verification" content="TfwknlfnF0aGuoQcclajv_00HvyPnq3aAEbfzvRS3FY" />
+
+  	    <!-- Facebook Meta Tags -->
+        <meta property="og:title" content="Albion Online Resource Refining Calculator">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://brannstroom.github.io/albiononline-refining-calculator/">
+        <meta property="og:description" content="An efficient and easy-to-use Resource Refining Calculator for Albion Online! Refine resources and maximize your profits with many useful features to calculate profits, focus cost, and more. Craft smarter and increase your profits. ">
+        <meta property="og:image" content="https://imgur.com/a/PrVszyL">
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="Albion Online Resource Refining Calculator">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="https://brannstroom.github.io/albiononline-refining-calculator/">
+        <meta property="twitter:url" content="https://brannstroom.github.io/albiononline-refining-calculator/">
+        <meta name="twitter:title" content="Albion Online Resource Refining Calculator">
+        <meta name="twitter:description" content="An efficient and easy-to-use Resource Refining Calculator for Albion Online! Refine resources and maximize your profits with many useful features to calculate profits, focus cost, and more. Craft smarter and increase your profits. ">
+        <meta name="twitter:image" content="https://imgur.com/a/PrVszyL">
+
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "WebApplication",
+                "name": "Albion Online Resource Refining Calculator",
+                "description": "An efficient and easy-to-use Resource Refining Calculator for Albion Online! Refine resources and maximize your profits with many useful features.",
+                "url": "https://brannstroom.github.io/albiononline-refining-calculator/",
+                "author": {
+                    "@type": "Person",
+                    "name": "Peter Brännström"
+                },
+                "applicationCategory": "GameApplication, SoftwareApplication",
+                "operatingSystem": "Any"
+            }
+        </script>
+
+    </head>
+
+  <body>
+    <script type="text/javascript">
+        (function(window, document, dataLayerName, id) {
+        window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+        function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+        var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+        var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+        tags.async=!0,tags.src="https://brannstroom.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+        !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+        })(window, document, 'dataLayer', 'ce836606-4175-48ff-aed9-639dbe2b9a5e');
+        </script>
+    <h1>Resource Refining Calculator</a></h1>
+
+    <div class="profile-wrapper"> 
+        <div class="profile">
+            <div class="refining-settings">
+                <div class="refining-station">
+                    <h2>Refining Station</h2>
+                    <label for="refining-resource">Resource</label>
+                    <select id="refining-resource" onchange="init();saveSettings(this);">
+                        <option value="0">Cloth</option>
+                        <option value="1">Bar</option>
+                        <option value="2">Leather</option>
+                        <option value="3">Plank</option>
+                        <option value="4">Stone Block</option>
+                    </select>
+
+                    <label for="refining-station-tax">Usage fee</label>
+                    <input type="number" id="refining-station-tax" value="0" min="0" max="9999" onClick="this.select();" oninput="updateNumbers(this);saveSettings(this);">           
+
+                    <label for="refining-station">Amount</label>
+                    <input type="number" id="refining-station-amount" value="1" min="1" onClick="this.select();" oninput="updateNumbers(this);saveSettings(this);">                
+                </div>
+                <br>
+
+                <div>
+                    <label for="refining-location">Return rate</label>
+                    <select id="refining-station-return-rate" onchange="customReturnRate();updateNumbers(this);saveSettings(this);">
+                        <option value="15.2">Royal City (15.2%)</option>
+                        <option value="36.7">Royal City with Bonus (36.7%)</option>
+                        <option value="0">Royal Island (0%)</option>
+                        <option value="28.5">Royal Island with Bonus (28.5%)</option>
+                        <option value="0">Custom</option>
+                    </select>
+
+                    <label class="text-label" for="daily-production-bonus">Daily bonus</label>
+                    <select id="daily-production-bonus" onchange="updateNumbers(this);saveSettings(this);">
+                        <option value="0">0%</option>
+                        <option value="10">10%</option>
+                        <option value="20">20%</option>
+                    </select>
+                    <br><br>
+                    <label class="text-label" for="global-discount">Global discount</label>
+                    <input style="width:6%;" type="number" id="global-discount" value="0" max="50" onClick="this.select();" oninput="saveSettings(this);">
+                </div>
+
+                <div class="refining-mastery">
+                    <h3>Refining Mastery</h3>
+
+                    <label for="refining-mastery">T4</label>
+                    <input type="number" id="refining-mastery-t4" value="0" min="0" max="100" onClick="this.select();" oninput="updateNumbers(this)">
+
+                    <label for="refining-mastery">T5</label>
+                    <input type="number" id="refining-mastery-t5" value="0" min="0" max="100" onClick="this.select();" oninput="updateNumbers(this)">
+
+                    <label for="refining-mastery">T6</label>
+                    <input type="number" id="refining-mastery-t6" value="0" min="0" max="100" onClick="this.select();" oninput="updateNumbers(this)">
+
+                    <label for="refining-mastery">T7</label>
+                    <input type="number" id="refining-mastery-t7" value="0" min="0" max="100" onClick="this.select();" oninput="updateNumbers(this)">
+
+                    <label for="refining-mastery">T8</label>
+                    <input type="number" id="refining-mastery-t8" value="0" min="0" max="100" onClick="this.select();" oninput="updateNumbers(this)">
+                </div>
+                <br>
+
+                <div>
+                    <label for="clear-table-button">Calculate max resource price for </label>
+                    <input type="number" id="refining-max-resource-price-percentage" value="0" min="0" onClick="this.select();" oninput="updateNumbers(this);saveSettings(this);"> % profit
+                    <button class="profile-button smaller-button" onclick="findResourceZCost()">Calculate</button>
+                    <label class="maxztutorial" onclick="toggleTutorialPopup()">How does it work?</label>
+                </div>
+            </div>
+
+            <div class="profile-settings">
+                <h2>Settings</h2>
+                <div>
+                    <label class="text-label" for="refining-market-tax">Include market tax</label>
+                    <select id="refining-market-tax-percentage" onchange="updateNumbers(this);saveSettings(this);">
+                        <option value="6.5">( 6.5%)</option>
+                        <option value="10.5">(10.5%)</option>
+                    </select>
+                    <label class="switch">
+                        <input type="checkbox" id="refining-market-tax" onchange="updateNumbers();saveSettings(this);">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <br>
+
+                <div>
+                    <label class="text-label" for="refine-from">Stack profits from 
+                        <select id="refine-from-dropdown" onchange="updateNumbers(this);updateRefineFromToDropdown()">
+                            <option value="2">T2</option>
+                            <option value="3">T3</option>
+                            <option value="4">T4</option>
+                            <option value="5">T5</option>
+                            <option value="6">T6</option>
+                            <option value="7">T7</option>
+                        </select>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="refine-from" onchange="updateNumbers()">
+                        <span class="slider round"></span>
+                    </label>
+
+                </div>
+                <br>
+
+                <div>
+                    <label class="text-label" for="profile-settings-focus-columns">Hide focus columns</label>
+                    <label class="switch">
+                        <input type="checkbox" id="profile-settings-focus-columns" onchange="toggleColumns('focus');saveSettings(this);">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <br>
+
+                <div>
+                    <label class="text-label" for="profile-settings-detail-columns">Show detail columns</label>
+                    <label class="switch">
+                        <input type="checkbox" id="profile-settings-detail-columns" onchange="toggleColumns('detail');saveSettings(this);">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="data-settings">
+                <h2>ㅤ</h2>
+                <div>
+                    <label class="text-label" for="table-settings-flip-table">Flip table</label>
+                    <label class="switch">
+                        <input type="checkbox" id="table-settings-flip-table" onchange="flipTable();saveSettings(this);">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <br>
+
+                <div>
+                    <label class="text-label" for="table-settings-hide-rows">Hide unused rows</label>
+                    <label class="switch">
+                        <input type="checkbox" id="table-settings-hide-rows" onchange="hideRows();">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <br>
+
+                <div style="margin-bottom:0.3rem;">
+                    <label class="text-label" for="clear-table-button">Clear current table data</label>
+                    <button class="profile-button" onclick="clearTable('table')">Table</button>
+                </div>
+                <br>
+
+                <div>
+                    <label class="text-label" for="clear-table-button">Clear all data</label>
+                    <button class="profile-button" onclick="clearTable('all')">All</button>
+                </div>
+            </div>
+
+            <div class="data-scrape">
+                <h2>Pull prices</h2>
+
+                <div>
+                    <label class="text-label" for="server-select">Select server</label>
+                    <select id="server-select" onchange="saveSettings(this);">
+                        <option value="west">West</option>
+                        <option value="east">East</option>
+                        <option value="europe">Europe</option>
+                    </select>
+                    <br><br>
+                </div>
+                
+                <div>
+                    <label class="text-label" for="">Type</label>
+                    <select id="price-type-select" onchange="saveSettings(this);editPullPriceType(this)">
+                        <option value="current">Current</option>
+                        <option value="average">Average</option>
+                    </select>
+                    <br><br>
+                </div>
+
+                <div id="period-select-div">
+                    <label class="text-label" for="time-period-select">Select time period</label>
+                    <select id="time-period-select" onchange="saveSettings(this)">
+                        <option value="1">1 Hour</option>
+                        <option value="6">6 Hours</option>
+                        <option value="24">1 Day</option>
+                        <option value="72">3 Days</option>
+                        <option value="168">1 Week</option>
+                        <option value="720">1 Month</option>
+                    </select>
+                    <br><br>
+                </div>
+
+                <div class="scrape-button">
+                    <label class="text-label" for="scrape-button">Pull resource prices</label>
+                    <br>
+                    <label for="refining-city-resource">From:</label>
+                    <select id="refining-city-resource" onchange="saveSettings(this);">
+                        <option value="martlock">Martlock</option>
+                        <option value="thetford">Thetford</option>
+                        <option value="fortsterling">Fort Sterling</option>
+                        <option value="lymhurst">Lymhurst</option>
+                        <option value="bridgewatch">Bridgewatch</option>
+                        <option value="caerleon">Caerleon</option>
+                    </select>
+                    <button class="profile-button pull-button" onclick="pullPrices(true)">Pull</button>
+                </div>
+
+                <div class="scrape-button" style="margin-top:0.8rem;">
+                    <label class="text-label" for="scrape-button">Pull product prices</label>
+                    <br>
+                    <label for="refining-city-product">From: </label>
+                    <select id="refining-city-product" onchange="saveSettings(this);">
+                        <option value="martlock">Martlock</option>
+                        <option value="thetford">Thetford</option>
+                        <option value="fortsterling">Fort Sterling</option>
+                        <option value="lymhurst">Lymhurst</option>
+                        <option value="bridgewatch">Bridgewatch</option>
+                        <option value="caerleon">Caerleon</option>
+                    </select>
+                    <button class="profile-button pull-button" onclick="pullPrices(false)">Pull</button>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="refining" class="refining">
+        <table id="refining-table" class="detail-table">
+            <thead>
+                <p id="table-failed-loading-error" style="color:red;">Seems like the table failed to load. Clear all data under Table settings or try another browser. If you have no luck fixing the problem, contact me on Discord (Peter#8103)</p>
+                <tr>
+                    <th>TIER</th>
+                    <th>RESOURCE</th>
+                    <th>PRICE</th>
+                    <th>PRODUCT</th>
+                    <th>PRICE</th>
+                    <th>PROFIT</th>
+                    <th>PROFIT %</th>
+                    <th id="focus-column">FOCUS COST</th>
+                    <th id="focus-column">FOCUS PROFIT</th>
+                    <th id="focus-column">PROFIT/FOCUS</th>
+                    <th id="detail-column">RESOURCE COST</th>
+                    <th id="detail-column">USAGE FEE</th>
+                    <th id="detail-column">MARKET TAX</th>
+                </tr>
+            </thead>
+            <tbody id="resouce-table-body">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <div id="copy-tooltip">Copied item name</div>
+
+    <div class="tutorialpopup" id="tutorial-popup" style="display:none;">
+        <div class="tutorialpopup-close" onclick="toggleTutorialPopup()">X</div>
+        <p style="font-size:x-large;color:#0E8388;margin-left:1rem;margin-bottom:-1rem;">How the function works</p>
+        <div class="tutorialtext">
+            This feature will calculate the maximum price you will be able to pay for the resources to still make the specified profit percentage at the current product price.
+            <br><br>
+            Keeping this at 0% can be a good idea for leveling refining, as you will be able to know the highest price you will be able to pay and break even. Remember that when doing this, everything bought below the calculated price will be a profit.
+            <br><br>
+            <b>How to use:</b>
+            <br>
+            1. Input usage fee and whether to include market tax.
+            <br>
+            2. Pull or input the current product prices into the product price input field.
+            <br>
+            3. Input the desired profit percentage.
+            <br>
+            4. Click the "Calculate" button.
+            <br>
+            5. Purchase all the resources you want to refine, up to the maximum price calculated.
+            <br>
+        </div>
+    </div>
+
+    <footer>
+        <p>I hope you find this refining calculator useful! If you encounter any issues, have any ideas for new features, or simply want to share your thoughts, please don't hesitate to send me a message on Discord (<a target="_blank" href="https://discord.com/users/147806091156127744">Brannstroom</a>), or open an issue in the <a href="https://github.com/Brannstroom/albiononline-refining-calculator" target="_blank">Github repository</a>. Also, if you find this calculator helpful, consider supporting it by starring the project on GitHub.</p>
+        <p>Created by <a target="_blank" href="https://github.com/Brannstroom">Brannstroom</a></p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+
+    </body>
+</html>
