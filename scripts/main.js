@@ -2952,7 +2952,7 @@ function getCheapestTransmuteCost(tier, enchant) {
     var transmute_cost = transmutationTree[tier + "_" + enchant]*2
     var global_discount = document.getElementById("global-discount").value/100;
     var total_tranmutation_cost = (transmute_cost*(1-global_discount)) + parseInt(t4_cost);
-    return total_tranmutation_cost;
+    return Math.ceil(total_tranmutation_cost);
 }
 
 
